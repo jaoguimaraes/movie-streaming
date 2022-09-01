@@ -9,3 +9,14 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Movie {
+  id          Int     @id @default(autoincrement())
+  title       String
+  votes       Int
+  description String
+  duration    Int
+  image       String
+
+  @@map("movie")
+}
