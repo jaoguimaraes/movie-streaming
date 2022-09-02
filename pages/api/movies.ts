@@ -1,8 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from '../../lib/prisma';
 
 type Movie = {
   id: Number,
@@ -13,22 +11,29 @@ type Movie = {
   image: String
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Movie[]>
-) {
-  
-  const movie = await prisma.movie.create({
-    data: {
-      title: '',
-      votes: 123,
-      description: 'Test',
-      duration: 1234,
-      image: 'Test'
-    },
-  });
+export default async function handler(req: NextApiRequest, res: NextApiResponse){
+	const {id, title, votes, description, duration, image} = req.body
 
-  const movies = await prisma.movie.findMany();
-  
-  res.status(200).json(movies);
+  if (req.method === "POST") {
+    try {
+      const movie = await prisma.movie.create({
+        data: {
+          id: id,
+          title: title,
+          votes: votes,
+          description: description,
+          duration: duration,
+          image: image
+        }
+      })
+      res.status(200).json(movie)
+    } catch (error) {
+      console.log("Failure");
+    }
+  }
+
+  if (req.method === "GET") {
+    const movies = await prisma.movie.findMany();
+    res.status(200).json(movies)
+  }
 }
