@@ -11,29 +11,28 @@ type Movie = {
   image: String
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse){
-	const {id, title, votes, description, duration, image} = req.body
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	const { title, votes, description, duration, image } = req.body
 
   if (req.method === "POST") {
     try {
       const movie = await prisma.movie.create({
         data: {
-          id: id,
           title: title,
           votes: votes,
           description: description,
           duration: duration,
           image: image
         }
-      })
+      });
       res.status(200).json(movie)
     } catch (error) {
-      console.log("Failure");
+      res.status(500).json("Failed to create movie");
     }
   }
 
   if (req.method === "GET") {
     const movies = await prisma.movie.findMany();
-    res.status(200).json(movies)
+    res.status(200).json(movies);
   }
 }

@@ -11,12 +11,11 @@ type Movie = {
   image: String
 }
 
-export default async function handler(
-  req: NextApiRequest, res: NextApiResponse){
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const movieId = req.query.id
   const { title, votes, description, duration, image } = req.body
 
-  if (req.method === 'PUT') {
+  if (req.method === "PUT") {
     try {
       const movie = await prisma.movie.update({
         where: { id: Number(movieId) },
@@ -30,7 +29,7 @@ export default async function handler(
       })
       res.status(200).json(movie)
     } catch (error) {
-      console.log("Failed to update movie")
+      res.status(500).json("Failed to update movie");
     }
   }
 
@@ -38,7 +37,7 @@ export default async function handler(
 		const movie = await prisma.movie.delete({
 			where: { id: Number(movieId) }
 		})
-		res.status(204).json(movie)
+		res.status(204).json(movie);
   }
 
   if (req.method === "GET") {
@@ -46,8 +45,7 @@ export default async function handler(
       where: {
         id: Number(movieId),
       },
-    })
-
+    });
     res.status(200).json(movies)
   }
 }
