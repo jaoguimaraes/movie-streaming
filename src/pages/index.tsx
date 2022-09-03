@@ -5,9 +5,6 @@ import Movie from '../../components/Movie'
 import styles from '../../styles/Home.module.css'
 
 const Home: NextPage<Props> = (props: Props) => {
-  
-  console.log(props);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -29,7 +26,7 @@ const Home: NextPage<Props> = (props: Props) => {
         <div className={styles.grid}>
 
           { props.movies.map((movie, i) => {     
-            return (<Movie movie={movie} />) 
+            return (<Movie key={i} movie={movie} />) 
           }) }
           
         </div>
@@ -68,7 +65,6 @@ type Props = {
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await fetch("http://localhost:3000/api/movies");
   const movies = await response.json();
-
   return {
     props: {
       movies
