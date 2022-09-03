@@ -27,8 +27,7 @@ Routes avaiables:
 - `PUT /movies/{id}`
 - `DELETE /movies/{id}`
 
-Postman collection available:
-https://www.getpostman.com/collections/be654e3af89c5946958d
+Postman collection available [here](https://www.getpostman.com/collections/be654e3af89c5946958d).
 
 Payload to create movies:
-- [`movies.json`](https://nextjs.org/docs/api-routes/introduction)
+- [`movies.json`](/postman/movies.json)
