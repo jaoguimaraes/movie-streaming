@@ -67,10 +67,36 @@
 
 .grid {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  justify-content: space-between;
+  padding: 1rem;
+  max-width: 950px;
+  margin: 0 auto;
+}
+  
+.grid div {
+  width: 30%;
+  color: #fff;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #111;
+  padding: 1rem;
+}
+
+.grid div img,
+.grid div p {
+  margin-bottom: 1rem;
+}
+
+.grid div h2 {
+  margin-bottom: 1.5rem;
+}
+
+.grid div a {
+  border-radius: 4px;
+  text-align: center;
 }
 
 .card {
