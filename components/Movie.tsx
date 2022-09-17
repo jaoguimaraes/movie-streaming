@@ -4,7 +4,6 @@ import Link from 'next/link';
 const Movie = ({ movie }) => {
     return (
         <div className={styles.grid}>
-            
             <Link href={`/movie/${movie.id}`}>
             <a className={styles.card}>
                 <img className={styles.image} src={movie.image} alt={movie.title}/>

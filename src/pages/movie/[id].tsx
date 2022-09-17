@@ -2,6 +2,8 @@ import React from "react";
 import Error from 'next/error'
 import styles from '../../../styles/MovieCard.module.css';
 import { GetServerSideProps } from "next";
+import Router from "next/router";
+import Link from "next/link";
 
 export type MovieProps = {
     id: number,
@@ -15,6 +17,14 @@ export type MovieProps = {
 type Props = {
     movie: MovieProps;
 };
+
+const handleDeleteMovie = async (id: number) => {
+    const endpoint = `/api/movies/${id}`;
+    const response = await fetch(endpoint, { method: "DELETE" });
+    console.log(response);
+    Router.push('/');
+    alert(`Movie deleted with success`);
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     const id = params?.id;
@@ -37,6 +47,12 @@ const Movie: React.FC<Props> = (props) => {
             <h2>{props.movie.title}</h2>
             <p>Description: {props.movie.description}</p>
             <p>Votes: {props.movie.votes}</p>
+            <div>
+                <button onClick={() => handleDeleteMovie(props.movie.id)}>Delete</button>
+                <Link href={ `/movie/edit/${props.movie.id}` }>
+                    <button>Edit</button>
+                </Link>
+            </div>            
         </div>
     );
 }

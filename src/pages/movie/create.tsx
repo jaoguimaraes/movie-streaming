@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import styles from '../../../styles/MovieCreate.module.css';
 
 const handleCreateMovie = async (event: { preventDefault: () => void; target: any; }) => {
@@ -8,7 +9,7 @@ const handleCreateMovie = async (event: { preventDefault: () => void; target: an
         votes: Number(event.target.votes.value),
         description: event.target.description.value,
         duration: Number(event.target.duration.value),
-        image: event.target.image.value
+        image: getImageUrl(event.target.image.value)
     }
     const movie = JSON.stringify(data);
     const options = {
@@ -20,8 +21,26 @@ const handleCreateMovie = async (event: { preventDefault: () => void; target: an
     }
     const response = await fetch(endpoint, options);
     const result = await response.json();
-    alert(`Movie was created: ${result.title}`);
+    Router.push('/');
+    alert(`Movie created with success: ${result.title}`);
 }
+
+const getImageUrl = (imageUrl: string) => {
+    const pathDefaultImage = 'https://upload.wikimedia.org/wikipedia/commons/a/af/Question_mark.png';
+    return isValidUrl(imageUrl)
+        ? imageUrl 
+        : pathDefaultImage;
+}
+
+const isValidUrl = (url: string) => {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(url);
+  }
 
 const CreateMovie = () => {
     return (
