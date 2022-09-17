@@ -1,10 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Router from 'next/router';
+import { useState } from 'react';
 import styles from '../../../../styles/MovieCreate.module.css';
 
 const handleEditMovie = async (event: { preventDefault: () => void; target: any; }) => {
     event.preventDefault();
-    const endpoint = '/api/movies';
+    const endpoint = `/api/movies/${id}`;
     const data = {
         title: event.target.title.value,
         votes: Number(event.target.votes.value),
@@ -14,7 +15,7 @@ const handleEditMovie = async (event: { preventDefault: () => void; target: any;
     }
     const movie = JSON.stringify(data);
     const options = {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -56,6 +57,8 @@ type Props = {
     movie: MovieProps;
 };
 
+const id = 0;
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     const id = params?.id;
     const response = await fetch(`http://localhost:3000/api/movies/${id}`);
@@ -71,15 +74,15 @@ const EditMovie: NextPage<Props> = (props: Props) => {
     return (
         <div className={styles.container}>
             <h1>Edit the movie</h1>
-                <form onSubmit={handleEditMovie} method="post" className={styles.form}>
-                    <input type="text" id="title" name="title" placeholder="Title" value={ props.movie.title }/>
-                    <input type="text" id="votes" name="votes" placeholder="Votes" value={ props.movie.votes }/>
-                    <input type="text" id="description" name="description"  placeholder="Description" value={ props.movie.description }/>
-                    <input type="text" id="duration" name="duration" placeholder="Duration" value={ props.movie.duration }/>
-                    <input type="text" id="image" name="image" placeholder="Image" value={ props.movie.image }/>
-                    <p/>
-                    <button type="submit">Submit</button>
-                </form>
+            <form onSubmit={handleEditMovie} method="post" className={styles.form}>
+                <input type="text" id="title" name="title" placeholder="Title" value={ props.movie.title }/>
+                <input type="text" id="votes" name="votes" placeholder="Votes" value={ props.movie.votes }/>
+                <input type="text" id="description" name="description"  placeholder="Description" value={ props.movie.description }/>
+                <input type="text" id="duration" name="duration" placeholder="Duration" value={ props.movie.duration }/>
+                <input type="text" id="image" name="image" placeholder="Image" value={ props.movie.image }/>
+                <p/>
+                <button type="submit">Edit</button>
+            </form>
         </div>
     );
 }

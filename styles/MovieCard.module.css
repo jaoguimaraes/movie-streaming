@@ -11,3 +11,8 @@
 .banner {
   width: 350px;
 }
+
+.handleButtons {
+  margin: 10px;
+  width: 80px;
+}

@@ -53,7 +53,7 @@ const CreateMovie = () => {
                     <input type="text" id="duration" name="duration" placeholder="Duration" />
                     <input type="text" id="image" name="image" placeholder="Image" />
                     <p/>
-                    <button type="submit">Submit</button>
+                    <button type="submit">Create</button>
                 </form>
         </div>
     );
