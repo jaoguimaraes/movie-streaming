@@ -1,6 +1,6 @@
-import styles from '../../../styles/Movie.module.css';
 import React from "react";
 import Error from 'next/error'
+import styles from '../../../styles/MovieCard.module.css';
 import { GetServerSideProps } from "next";
 
 export type MovieProps = {
@@ -31,15 +31,12 @@ const Movie: React.FC<Props> = (props) => {
     if (props?.movie === null) {
         return <Error statusCode={404} />
     }
-
     return (
-        <div className={styles.grid}>
-            <a className={styles.card}>
-                <img className={styles.image} src={props.movie.image} alt={props.movie.title}/>
-                <h2>{props.movie.title}</h2>
-                <p>Description: {props.movie.description}</p>
-                <p>Votes: {props.movie.votes}</p>
-            </a>
+        <div className={styles.container}>
+            <img className={styles.banner} src={props.movie.image} alt={props.movie.title}/>
+            <h2>{props.movie.title}</h2>
+            <p>Description: {props.movie.description}</p>
+            <p>Votes: {props.movie.votes}</p>
         </div>
     );
 }

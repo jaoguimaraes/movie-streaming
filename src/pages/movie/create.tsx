@@ -1,13 +1,15 @@
-const handleCreateMovie = async (event) => {
+import styles from '../../../styles/MovieCreate.module.css';
+
+const handleCreateMovie = async (event: { preventDefault: () => void; target: any; }) => {
     event.preventDefault();
     const endpoint = '/api/movies';
-    const data = event.target as typeof event.target & {
-        title: { value: string };
-        votes: { value: number };
-        description: { value: string };
-        duration: { value: number };
-        image: { value: string };
-    };
+    const data = {
+        title: event.target.title.value,
+        votes: Number(event.target.votes.value),
+        description: event.target.description.value,
+        duration: Number(event.target.duration.value),
+        image: event.target.image.value
+    }
     const movie = JSON.stringify(data);
     const options = {
       method: 'POST',
@@ -23,26 +25,17 @@ const handleCreateMovie = async (event) => {
 
 const CreateMovie = () => {
     return (
-        <div>
+        <div className={styles.container}>
             <h1>Create a movie</h1>
-            <form onSubmit={handleCreateMovie} method="post">
-                <label htmlFor="title">Title:</label>
-                <input type="text" id="title" name="title" />
-
-                <label htmlFor="votes">Votes:</label>
-                <input type="text" id="votes" name="votes" />
-
-                <label htmlFor="description">Description:</label>
-                <input type="text" id="description" name="description" />
-
-                <label htmlFor="duration">Duration:</label>
-                <input type="text" id="duration" name="duration" />
-
-                <label htmlFor="image">Image:</label>
-                <input type="text" id="image" name="image" />
-
-                <button type="submit">Submit</button>
-            </form>
+                <form onSubmit={handleCreateMovie} method="post" className={styles.form}>
+                    <input type="text" id="title" name="title" placeholder="Title" />
+                    <input type="text" id="votes" name="votes" placeholder="Votes" />
+                    <input type="text" id="description" name="description" placeholder="Description" />
+                    <input type="text" id="duration" name="duration" placeholder="Duration" />
+                    <input type="text" id="image" name="image" placeholder="Image" />
+                    <p/>
+                    <button type="submit">Submit</button>
+                </form>
         </div>
     );
 }
