@@ -1,14 +1,17 @@
 import styles from '../styles/Movie.module.css'
+import Link from 'next/link';
 
 const Movie = ({ movie }) => {
     return (
         <div className={styles.grid}>
+            <Link href={`/movie/${movie.id}`}>
             <a className={styles.card}>
-                <img src={movie.image} alt={movie.title} style={{ width: 240, height: 300 }}/>
-                <h2>{ movie.title }</h2>
-                <p>Description: {movie.description}</p>
-                <p>Votes: {movie.votes}</p>
+                <img className={styles.image} src={movie.image} alt={movie.title}/>
+                <h2 className={styles.title}>{ movie.title }</h2>
+                <p className={styles.description}>Description: {movie.description}</p>
+                <p className={styles.votes}>Votes: {movie.votes}</p>
             </a>
+            </Link>
         </div>
     );
 };
