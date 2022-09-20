@@ -20,7 +20,6 @@ type Props = {
 const handleDeleteMovie = async (id: number) => {
     const endpoint = `/api/movies/${id}`;
     const response = await fetch(endpoint, { method: "DELETE" });
-    console.log(response);
     Router.push('/');
     alert(`Movie deleted with success`);
 }
