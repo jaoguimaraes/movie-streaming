@@ -1,0 +1,20 @@
+.image {
+    width: 240px;
+    height: 300px;
+}
+
+.title {
+    color:darkorange;
+}
+
+.description {
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.votes {
+    text-align: left;
+}

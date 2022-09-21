@@ -18,17 +18,21 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Create and seed the database
+Run the following command to create your SQLite database file. This also creates the User and Post tables that are defined in prisma/schema.prisma:
 
-To learn more about Next.js, take a look at the following resources:
+`npx prisma migrate dev --name init`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to use endpoints
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Routes avaiables:
+- `GET /movies`
+- `POST /movies`
+- `GET /movies/{id}`
+- `PUT /movies/{id}`
+- `DELETE /movies/{id}`
 
-## Deploy on Vercel
+Postman collection available [here](https://www.getpostman.com/collections/be654e3af89c5946958d).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Payload to create movies:
+- [`movies.json`](/postman/movies.json)
