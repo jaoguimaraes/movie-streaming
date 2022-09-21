@@ -36,7 +36,7 @@ type Props = {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     const id = params?.id;
-    const response = await fetch(`http://localhost:3000/api/movies/${id}`);
+    const response = await fetch(`${process.env.URL}/api/movies/${id}`);
     const movie = await response.json();
     return {
         props: {
